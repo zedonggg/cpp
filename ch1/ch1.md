@@ -130,3 +130,97 @@ int main()
 }
 ```
 This produces `x is equal to: 5`
+
+
+
+**Using std::endl to output a newline**
+Explicitly use `std::endl` to print newline or cout will keep printing on the same line regardless of when it was called.
+```cpp
+#include <iostream> // for std::cout and std::endl
+
+int main()
+{
+    std::cout << "Hi!" << std::endl; // std::endl will cause the cursor to move to the next line
+    std::cout << "My name is Alex." << std::endl;
+
+    return 0;
+}
+```
+This prints:
+```
+Hi!
+My name is Alex.
+```
+
+
+**std::cout is buffered**
+std::cout does not immediately send to console. The output is collected in a region of memory known as the buffer, and the buffer is periodically **flushed** and the data is sent collectively to the destination (console). This means if the program aborts before the buffer is flushed, any output waiting in the buffer will not be displayed.
+
+Buffering can significantly increase performance by batching multiple output requests together to minimize the number of times output has to be sent to the output device
+
+
+**Preferably, use \n instead of endl as endl clears the buffer as well which makes it inefficient if you keep having to print it**
+
+
+**std::cin**
+Standard character input reads input from keyboard using the extraction operator (`>>`). The input must be stored in a variable to be used.
+
+```cpp
+#include <iostream>  // for std::cout and std::cin
+
+int main()
+{
+    std::cout << "Enter a number: "; // ask user for a number
+
+    int x{};       // define variable x to hold user input (and value-initialize it)
+    std::cin >> x; // get number from keyboard and store it in variable x
+
+    std::cout << "You entered " << x << '\n';
+    return 0;
+}
+```
+Note that the user must press enter to get the input accepted as enter will force the newline.
+
+
+You can also cin multiple variables:
+```cpp
+#include <iostream>  // for std::cout and std::cin
+
+int main()
+{
+    std::cout << "Enter two numbers separated by a space: ";
+
+    int x{}; // define variable x to hold user input (and value-initialize it)
+    int y{}; // define variable y to hold user input (and value-initialize it)
+    std::cin >> x >> y; // get two numbers and store in variable x and y respectively
+
+    std::cout << "You entered " << x << " and " << y << '\n';
+
+    return 0;
+}
+```
+
+
+## Uninitialized variables and undefined behavior
+C++ does not auto initialize variables to a given value (such as zero) for performance reasons. When a variable that is not initialized is given a memory address to store data, the default value of the variable is whatever (garbage) value happens to already be in that memory address.
+
+
+## Keywords
+![list of c++ keywords through c++23](image.png)
+
+Identifier naming rules:
+- Cannot be keyword
+- Can only be composed of upper/lowercase letters, numbers, and underscore
+- Must begin with a letter or underscore. Cannot start with a number
+- C++ is case-sensitive
+
+Conventions:
+- Names start in lowercase
+- Either snake_case or camelCase (stdlib uses snake_case)
+- Avoid names starting with underscore, as those names are typically reserved for OS, library, or compiler use
+- Identifier should be clear in what value they are holding (variable names should make sense)
+- Length of name should be proportional to how widely it is used. If it is used trivially, it can have a short name, but if it used more broadly, it should have a longer and more descriptive name
+- Use comments above the declaration to provide more explicit information, rather than trying to cram everything in the var name
+
+
+C++ is whitespace-independent (unlike python)
