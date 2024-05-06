@@ -1,0 +1,7 @@
+**Good practice**  
+- Use the debug build configuration when developing a program.
+- When ready to release the executable to others or test performance, use the release build configuration.
+
+
+- Disable compiler extensions to ensure programs remain complaint with C++ standards and are compatible with any system
+- Compiler extensions are usually not necessary
